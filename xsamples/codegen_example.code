@@ -1,0 +1,46 @@
+GOTO start<<1>>
+LABEL Read
+READ
+RETURN Read
+LABEL Write
+LOAD 0 dummyFormal
+WRITE
+RETURN Write
+LABEL start<<1>>
+LIT 0 result
+GOTO continue<<3>>
+LABEL add<<2>>
+LOAD 0 a
+LOAD 1 b
+BOP +
+RETURN add<<2>>
+POP 0
+LIT 0 DEFAULT-RETURN-VALUE
+RETURN add<<2>>
+LABEL continue<<3>>
+LIT 20
+LIT 22
+ARGS 2
+CALL add<<2>>
+STORE 0 result
+LOAD 0 result
+LIT 42
+BOP ==
+FALSEBRANCH else<<4>>
+POP 0
+GOTO continue<<5>>
+LABEL else<<4>>
+POP 0
+LABEL continue<<5>>
+LABEL while<<7>>
+LOAD 0 result
+LIT 42
+BOP <
+FALSEBRANCH continue<<6>>
+LIT 100
+STORE 0 result
+POP 0
+GOTO while<<7>>
+LABEL continue<<6>>
+POP 1
+HALT
