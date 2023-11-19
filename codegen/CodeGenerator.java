@@ -324,31 +324,18 @@ public class CodeGenerator extends TreeVisitor {
 
   @Override
   public Object visit(IterationTree node) throws Exception {
-    if (!(node instanceof IterationTree)) {
-        throw new IllegalArgumentException("Invalid node type for IterationTree");
-    }
-    node.getChild(0).accept(this); 
-    node.getChild(0).getChild(1).accept(this);
+    String continueLabel = createLabel("continue");
+    String iterateLabel = createLabel("iterate");
 
-    storeCode(new LabelCode(Codes.ByteCodes.BOP, "-")); 
+    storeCode(new LabelCode(Codes.ByteCodes.LABEL, iterateLabel));
 
-    String startLoopLabel = createLabel("startLoop");
-    String endLoopLabel = createLabel("endLoop");
-    
-    storeCode(new LabelCode(Codes.ByteCodes.LABEL, startLoopLabel));
-    
+    node.getChild(0).accept(this);
+    storeCode(new LabelCode(Codes.ByteCodes.FALSEBRANCH, continueLabel));
+
     node.getChild(1).accept(this);
-    storeCode(new LabelCode(Codes.ByteCodes.LIT, "1"));
-    storeCode(new LabelCode(Codes.ByteCodes.BOP, "-"));
-    
-    storeCode(new LabelCode(Codes.ByteCodes.LIT, "0"));
-    storeCode(new LabelCode(Codes.ByteCodes.BOP, ">="));
-    storeCode(new LabelCode(Codes.ByteCodes.FALSEBRANCH, endLoopLabel));
+    storeCode(new LabelCode(Codes.ByteCodes.GOTO, iterateLabel));
 
-    storeCode(new LabelCode(Codes.ByteCodes.GOTO, startLoopLabel));
-
-    storeCode(new LabelCode(Codes.ByteCodes.LABEL, endLoopLabel));
-    storeCode(new Code(Codes.ByteCodes.POP));
+    storeCode(new LabelCode(Codes.ByteCodes.LABEL, continueLabel));
 
     return null;
 }
