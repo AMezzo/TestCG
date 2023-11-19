@@ -330,7 +330,7 @@ public class CodeGenerator extends TreeVisitor {
     node.getChild(0).accept(this); 
     node.getChild(0).getChild(1).accept(this);
 
-    storeCode(new Code(Codes.ByteCodes.BOP, "-")); 
+    storeCode(new LabelCode(Codes.ByteCodes.BOP, "-")); 
 
     String startLoopLabel = createLabel("startLoop");
     String endLoopLabel = createLabel("endLoop");
@@ -338,11 +338,11 @@ public class CodeGenerator extends TreeVisitor {
     storeCode(new LabelCode(Codes.ByteCodes.LABEL, startLoopLabel));
     
     node.getChild(1).accept(this);
-    storeCode(new Code(Codes.ByteCodes.LIT, "1"));
-    storeCode(new Code(Codes.ByteCodes.BOP, "-"));
-    storeCode(new Code(Codes.ByteCodes.DUP));
-    storeCode(new Code(Codes.ByteCodes.LIT, "0"));
-    storeCode(new Code(Codes.ByteCodes.BOP, ">="));
+    storeCode(new LabelCode(Codes.ByteCodes.LIT, "1"));
+    storeCode(new LabelCode(Codes.ByteCodes.BOP, "-"));
+    
+    storeCode(new LabelCode(Codes.ByteCodes.LIT, "0"));
+    storeCode(new LabelCode(Codes.ByteCodes.BOP, ">="));
     storeCode(new LabelCode(Codes.ByteCodes.FALSEBRANCH, endLoopLabel));
 
     storeCode(new LabelCode(Codes.ByteCodes.GOTO, startLoopLabel));
