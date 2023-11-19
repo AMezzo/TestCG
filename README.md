@@ -2,7 +2,7 @@
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-7f7980b617ed060a017424585567c406b6ee15c891e84e1186181d67ecf80aa0.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=12885854)
 # Assignment 3 Documentation
 
-Author: Your full name here (please keep the Author: heading for my grading script)
+Alberto Mezzo
 
 ## Scope of Work
 
@@ -10,7 +10,7 @@ Mark each of the requirements you completed by adding an X in between the square
 
 | Requirement                              | Completed? | Comments from student |
 | ---------------------------------------- | ---------- | --------------------- |
-| 1. Byte codes generated for Iterate Tree | []         |                       |
+| 1. Byte codes generated for Iterate Tree | [X]        |                       |
 
 ## Results and Conclusions
 
@@ -25,3 +25,4 @@ Describe what you learned by completing this assignment. Aim for a paragraph.
 ### Challenges I Encountered
 
 Describe challenges you encountered completing this assignment, and how you overcame those challenges. Aim for a paragraph.
+
